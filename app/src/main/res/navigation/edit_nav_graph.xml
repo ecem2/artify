@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/edit_nav_graph"
+    app:startDestination="@id/editFragment">
+
+    <fragment
+        android:id="@+id/editFragment"
+        android:name="com.hidden.artify.ui.edit.EditFragment"
+        android:label="EditFragment"
+        tools:layout="@layout/fragment_edit">
+        <action
+            android:id="@+id/action_editFragment_to_editPhotoFragment"
+            app:destination="@id/editPhotoFragment" />
+        <action
+            android:id="@+id/action_editFragment_to_cameraFragment"
+            app:destination="@id/cameraFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/editPhotoFragment"
+        android:name="com.hidden.artify.ui.edit.EditPhotoFragment"
+        android:label="EditPhotoFragment"
+        tools:layout="@layout/fragment_edit_photo">
+        <argument
+            android:name="imageModel"
+            app:argType="com.hidden.artify.data.model.SizeModel"
+            app:nullable="true"
+            android:defaultValue="@null" />
+    </fragment>
+    <fragment
+        android:id="@+id/cameraFragment"
+        android:name="com.hidden.artify.ui.camera.CameraFragment"
+        android:label="CameraFragment" />
+</navigation>

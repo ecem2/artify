@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/homeFragment"
+        android:icon="@drawable/ic_art"
+        android:title="All Art" />
+    <item
+        android:id="@+id/editFragment"
+        android:icon="@drawable/ic_avatar"
+        android:title="Avatars" />
+    <item
+        android:id="@+id/discoveryFragment"
+        android:icon="@drawable/ic_discovery"
+        android:title="Discovery" />
+</menu>

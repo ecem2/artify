@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/home_nav_graph"
+    app:startDestination="@id/homeFragment">
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.hidden.artify.ui.home.HomeFragment"
+        android:label="HomeFragment"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_homeFragment_to_generateFragment"
+            app:destination="@id/generateFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_artStyleFragment"
+            app:destination="@id/artStyleFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/generateFragment"
+        android:name="com.hidden.artify.ui.generate.GenerateFragment"
+        android:label="GenerateFragment"
+        tools:layout="@layout/fragment_generate">
+        <argument
+            android:name="requestModel"
+            app:argType="com.hidden.artify.data.model.RequestModel" />
+        <action
+            android:id="@+id/action_generateFragment_to_editPhotoFragment"
+            app:destination="@id/editPhotoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/artStyleFragment"
+        android:name="com.hidden.artify.ui.arts.ArtStyleFragment"
+        android:label="ArtStyleFragment"
+        tools:layout="@layout/fragment_art_style" />
+    <fragment
+        android:id="@+id/editFragment"
+        android:name="com.hidden.artify.ui.edit.EditFragment"
+        android:label="EditFragment"
+        tools:layout="@layout/fragment_edit">
+        <argument
+            android:name="imageModel"
+            android:defaultValue="@null"
+            app:argType="com.hidden.artify.data.model.SizeModel"
+            app:nullable="true" />
+        <action
+            android:id="@+id/action_editFragment_to_cameraFragment"
+            app:destination="@id/cameraFragment" />
+        <action
+            android:id="@+id/action_editFragment_to_editPhotoFragment"
+            app:destination="@id/editPhotoFragment"
+            app:popUpTo="@id/editFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/cameraFragment"
+        android:name="com.hidden.artify.ui.camera.CameraFragment"
+        android:label="CameraFragment"
+        tools:layout="@layout/fragment_camera">
+        <action
+            android:id="@+id/action_cameraFragment_to_editFragment"
+            app:destination="@id/editFragment"
+            app:popUpTo="@id/cameraFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_cameraFragment_to_editPhotoFragment"
+            app:destination="@id/editPhotoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/editPhotoFragment"
+        android:name="com.hidden.artify.ui.edit.EditPhotoFragment"
+        android:label="EditPhotoFragment"
+        tools:layout="@layout/fragment_edit_photo">
+        <argument
+            android:name="imageModel"
+            android:defaultValue="@null"
+            app:argType="com.hidden.artify.data.model.SizeModel"
+            app:nullable="true" />
+        <action
+            android:id="@+id/action_editPhotoFragment_to_editFragment"
+            app:destination="@id/editFragment"
+            app:popUpTo="@id/editPhotoFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+</navigation>

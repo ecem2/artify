@@ -1,0 +1,140 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id("androidx.navigation.safeargs.kotlin")
+    id("com.google.dagger.hilt.android")
+    id("kotlin-parcelize")
+    id "kotlin-kapt"
+}
+
+android {
+    namespace 'com.hidden.artify'
+    compileSdk 33
+
+    defaultConfig {
+        applicationId "com.hidden.artify"
+        minSdk 26
+        targetSdk 33
+        versionCode 1
+        versionName "1.0"
+
+        buildConfigField "String", "BASE_URL_GENERATION", "$BASE_URL_GENERATION"
+        buildConfigField "String", "BASE_URL_EDIT", "$BASE_URL_EDIT"
+
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    buildFeatures {
+        dataBinding true
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+
+    def lifecycle_version = "2.6.1"
+    def nav_version = "2.5.3"
+    def retrofit_version = "2.9.0"
+    def okhttp3_version = "5.0.0-alpha.2"
+
+    implementation 'androidx.core:core-ktx:1.10.1'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'com.google.android.material:material:1.9.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+
+    //Navigation
+    implementation("androidx.navigation:navigation-fragment-ktx:$nav_version")
+    implementation("androidx.navigation:navigation-ui-ktx:$nav_version")
+    // Feature module Support
+    implementation("androidx.navigation:navigation-dynamic-features-fragment:$nav_version")
+    // Splash screen
+    implementation("androidx.core:core-splashscreen:1.0.1")
+    //Glide
+    implementation 'com.github.bumptech.glide:glide:4.14.2'
+    kapt 'com.github.bumptech.glide:compiler:4.14.2'
+    implementation 'jp.wasabeef:glide-transformations:4.3.0'
+    //Multidex
+    implementation 'com.android.support:multidex:1.0.3'
+    //Desugar
+    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.2.2")
+    //Billing
+    implementation("com.android.billingclient:billing-ktx:6.0.1")
+    implementation 'com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava'
+    implementation 'com.google.guava:guava:24.1-jre'
+    // Also declare the dependency for the Google Play services library and specify its version
+    implementation 'com.google.android.gms:play-services-auth:20.5.0'
+    // Retrofit
+    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofit_version"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
+    implementation "com.squareup.retrofit2:converter-scalars:$retrofit_version"
+    implementation "com.squareup.okhttp3:okhttp:$okhttp3_version"
+    implementation "com.squareup.okhttp3:logging-interceptor:$okhttp3_version"
+    //Gson
+    implementation 'com.google.code.gson:gson:2.10'
+    //Coroutines
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
+    //HILT
+    implementation("com.google.dagger:hilt-android:2.44")
+    kapt("com.google.dagger:hilt-android-compiler:2.44")
+    annotationProcessor 'com.google.dagger:hilt-android-compiler:2.44'
+    //Lifecycle
+    // ViewModel
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version")
+    // LiveData
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version")
+    // Lifecycles only (without ViewModel or LiveData)
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version")
+    // Saved state module for ViewModel
+    implementation("androidx.lifecycle:lifecycle-viewmodel-savedstate:$lifecycle_version")
+    // alternately - if using Java8, use the following instead of lifecycle-compiler
+    implementation("androidx.lifecycle:lifecycle-common-java8:$lifecycle_version")
+    implementation 'androidx.activity:activity-ktx:1.7.2'
+    implementation 'androidx.fragment:fragment-ktx:1.6.0-rc01'
+    // Serialization
+    implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.3"
+    //RoundedImageView
+    implementation 'com.makeramen:roundedimageview:2.3.0'
+    // Lottie
+    implementation "com.airbnb.android:lottie:5.2.0"
+
+    // Concurrent library for asynchronous coroutines
+    implementation 'androidx.concurrent:concurrent-futures-ktx:1.1.0'
+    // CameraX core library
+    def camerax_version = '1.1.0-beta01'
+    implementation "androidx.camera:camera-core:$camerax_version"
+    // CameraX Camera2 extensions
+    implementation "androidx.camera:camera-camera2:$camerax_version"
+    // CameraX Lifecycle library
+    implementation "androidx.camera:camera-lifecycle:$camerax_version"
+    // CameraX View class
+    implementation "androidx.camera:camera-view:$camerax_version"
+    //WindowManager
+    implementation 'androidx.window:window:1.0.0-alpha09'
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.0"
+
+    // ScratchView
+    implementation 'com.github.cooltechworks:ScratchView:v1.1'
+
+}
+// Allow references to generated code
+kapt {
+    correctErrorTypes = true
+}

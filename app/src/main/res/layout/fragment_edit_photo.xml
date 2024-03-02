@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_back"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="@dimen/margin_24"
+            android:src="@drawable/ic_arrow_left"
+            app:layout_constraintBottom_toTopOf="@+id/gl_edit_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_edit_title"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:autoSizeMaxTextSize="@dimen/text_size_20"
+            android:autoSizeMinTextSize="@dimen/text_size_12"
+            android:autoSizeTextType="uniform"
+            android:fontFamily="@font/inter_semi_bold"
+            android:gravity="center"
+            android:text="@string/edit"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_16"
+            app:layout_constraintBottom_toTopOf="@+id/gl_edit_title"
+            app:layout_constraintEnd_toStartOf="@+id/tv_edit_reset"
+            app:layout_constraintStart_toEndOf="@+id/iv_back"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_edit_reset"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/margin_24"
+            android:autoSizeMaxTextSize="@dimen/text_size_16"
+            android:autoSizeMinTextSize="@dimen/text_size_12"
+            android:autoSizeTextType="uniform"
+            android:fontFamily="@font/inter_semi_bold"
+            android:text="@string/reset"
+            android:textAllCaps="false"
+            android:textColor="@color/purple"
+            android:textSize="@dimen/text_size_14"
+            app:layout_constraintBottom_toTopOf="@+id/gl_edit_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tv_edit_title"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_edit_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.10" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/margin_24"
+            android:layout_marginEnd="@dimen/margin_24"
+            app:layout_constraintBottom_toTopOf="@+id/gl_edit_image"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/gl_edit_title">
+
+            <com.hidden.artify.view.WScratchView xmlns:wsv="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/iv_edit_photo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:riv_corner_radius="20dp"
+                tools:src="@drawable/img_realistic"
+                wsv:antiAlias="true"
+                wsv:revealSize="20dp"
+                wsv:scratchable="true" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_edit_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.50" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_can_edit"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_24"
+            android:layout_marginTop="@dimen/margin_12"
+            android:layout_marginEnd="@dimen/margin_24"
+            android:autoSizeMaxTextSize="@dimen/text_size_20"
+            android:autoSizeMinTextSize="@dimen/text_size_12"
+            android:autoSizeTextType="uniform"
+            android:drawableStart="@drawable/ic_edit_photo"
+            android:drawablePadding="@dimen/padding_12"
+            android:fontFamily="@font/inter_medium"
+            android:gravity="center|start"
+            android:text="@string/you_can_edit"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_16"
+            app:layout_constraintBottom_toTopOf="@+id/tv_edit_description"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/gl_edit_image" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/tv_edit_description"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_24"
+            android:layout_marginTop="@dimen/margin_12"
+            android:layout_marginEnd="@dimen/margin_24"
+            android:autoSizeMaxTextSize="@dimen/text_size_20"
+            android:autoSizeMinTextSize="@dimen/text_size_12"
+            android:autoSizeTextType="uniform"
+            android:background="@null"
+            android:ems="10"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:fontFamily="@font/inter_semi_bold"
+            android:gravity="top|start|center"
+            android:hint="@string/edit_hint"
+            android:padding="@dimen/padding_16"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            android:textColorHint="@color/bg_gray"
+            android:textCursorDrawable="@drawable/et_cursor"
+            android:textSize="@dimen/text_size_16"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize"
+            app:layout_constraintBottom_toTopOf="@+id/gl_edit_generate_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_can_edit" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_edit_generate_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.85" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_generate"
+            android:layout_width="wrap_content"
+            android:layout_height="55dp"
+            android:layout_marginStart="@dimen/margin_24"
+            android:layout_marginTop="@dimen/margin_10"
+            android:layout_marginEnd="@dimen/margin_24"
+            android:layout_marginBottom="@dimen/margin_30"
+            android:autoSizeMaxTextSize="@dimen/text_size_20"
+            android:autoSizeMinTextSize="@dimen/text_size_12"
+            android:autoSizeTextType="uniform"
+            android:background="@mipmap/bg_generate_button"
+            android:fontFamily="@font/inter_bold"
+            android:maxWidth="250dp"
+            android:maxHeight="70dp"
+            android:text="@string/generate"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_16"
+            app:backgroundTint="@null"
+            app:icon="@drawable/ic_onboard_star"
+            app:iconGravity="textEnd"
+            app:iconPadding="10dp"
+            app:iconTint="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/gl_edit_generate_button" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
