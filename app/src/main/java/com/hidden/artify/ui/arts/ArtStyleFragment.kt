@@ -1,16 +1,22 @@
 package com.hidden.artify.ui.arts
 
+import android.app.Dialog
 import android.content.Context
+import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.view.inputmethod.InputMethodManager
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.hidden.artify.R
 import com.hidden.artify.core.fragments.BaseFragment
 import com.hidden.artify.data.model.ArtStyleModel
 import com.hidden.artify.databinding.FragmentArtStyleBinding
 import com.hidden.artify.extensions.popBack
 import com.hidden.artify.ui.home.ArtStyleAdapter
+import com.hidden.artify.ui.home.HomeFragment
 import com.hidden.artify.ui.home.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -25,7 +31,11 @@ class ArtStyleFragment : BaseFragment<HomeViewModel, FragmentArtStyleBinding>(),
 
     override fun onInitDataBinding() {
         viewBinding.ivRight.setOnClickListener {
-            popBack()
+            val transaction = childFragmentManager.beginTransaction()
+            val homeFragment = HomeFragment()
+            transaction.add(R.id.container, homeFragment)
+            transaction.addToBackStack(null)
+            transaction.commit()
         }
         setupArtStyles()
     }

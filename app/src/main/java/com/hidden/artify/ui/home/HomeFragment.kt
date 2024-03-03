@@ -1,12 +1,16 @@
 package com.hidden.artify.ui.home
 
 import android.content.Context
+import android.util.Log
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.hidden.artify.R
 import com.hidden.artify.core.common.Util.EMPTY_STRING
 import com.hidden.artify.core.fragments.BaseFragment
@@ -14,14 +18,15 @@ import com.hidden.artify.data.model.ArtStyleModel
 import com.hidden.artify.data.model.RequestModel
 import com.hidden.artify.data.model.SizeModel
 import com.hidden.artify.databinding.FragmentHomeBinding
+import com.hidden.artify.extensions.drawable
 import com.hidden.artify.extensions.hideKeyboard
+import com.hidden.artify.ui.arts.ArtStyleFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>(),
-    SizeAdapter.OnItemSelectedListener, ArtStyleAdapter.OnArtItemSelectedListener {
+    ArtStyleAdapter.OnArtItemSelectedListener {
 
-    private val sizeAdapter by lazy { SizeAdapter() }
     private val artStyleAdapter by lazy { ArtStyleAdapter() }
     private lateinit var promptMessage: String
     private var selectedCount: Int = 0
@@ -41,7 +46,7 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>(),
         promptMessage = EMPTY_STRING
         selectedSize = getString(R.string.size_one)
         selectedCount = 4
-
+        textSizeColor()
         setupArtStyles()
         viewBinding.buttonGenerate.setOnClickListener {
             promptMessage = viewBinding.etPrompt.text.toString()
@@ -64,10 +69,40 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>(),
         }
 
         viewBinding.tvSeeAll.setOnClickListener {
-            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToArtStyleFragment())
+            //findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToArtStyleFragment())
+            //showBottomSheet()
+            showArtStyleFragment()
+            viewBinding.etPrompt.isEnabled = false
         }
     }
 
+    private fun textSizeColor() {
+        viewBinding.llSquare.setOnClickListener {
+            clearBackgrounds()
+            viewBinding.llSquare.setBackgroundResource(R.drawable.bg_oval_black)
+        }
+        viewBinding.llRectangle.setOnClickListener {
+            clearBackgrounds()
+            viewBinding.llRectangle.setBackgroundResource(R.drawable.bg_oval_black)
+        }
+        viewBinding.llVertical.setOnClickListener {
+            clearBackgrounds()
+            viewBinding.llVertical.setBackgroundResource(R.drawable.bg_oval_black)
+        }
+    }
+
+    private fun clearBackgrounds() {
+        viewBinding.llSquare.setBackgroundResource(R.drawable.bg_size)
+        viewBinding.llRectangle.setBackgroundResource(R.drawable.bg_size)
+        viewBinding.llVertical.setBackgroundResource(R.drawable.bg_size)
+    }
+    private fun showArtStyleFragment() {
+        val transaction = childFragmentManager.beginTransaction()
+        val artStyleFragment = ArtStyleFragment()
+        transaction.add(R.id.fragment_container, artStyleFragment)
+        transaction.addToBackStack(null)
+        transaction.commit()
+    }
     private fun setupArtStyles() {
         artStyleAdapter.setOnArtItemSelectedListener(this)
         viewBinding.rvArtStyle.apply {
@@ -92,10 +127,13 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>(),
             inputManager.showSoftInput(viewBinding.etPrompt, InputMethodManager.SHOW_IMPLICIT)
         }
     }
-
-    override fun onItemSelected(item: SizeModel) {
-        selectedSize = item.size.toString()
+    private fun showBottomSheet() {
+        val dialogView = layoutInflater.inflate(R.layout.fragment_art_style, null)
+        val dialog = BottomSheetDialog(requireContext(), R.style.BaseBottomSheetDialogTrasn)
+        dialog.setContentView(dialogView)
+        dialog.show()
     }
+
 
     override fun onArtItemSelected(item: ArtStyleModel) {
         selectedArtStyle = item.name

@@ -16,19 +16,9 @@
     </style>
     <style name="BaseBottomSheetDialogTrasn" parent="@style/Theme.Design.Light.BottomSheetDialog">
         <item name="android:windowIsFloating">false</item>
-        <item name="bottomSheetStyle">@style/BottomSheetTrans</item>
-    </style>
-    <style name="BottomSheetTrans" parent="@style/Widget.Design.BottomSheet.Modal">
-        <item name="android:background">@android:color/transparent</item>
+
     </style>
 
-    <style name="BottomSheetDialogThemeTrans" parent="BaseBottomSheetDialogTrasn">
-        <item name="android:statusBarColor">@android:color/transparent</item>
-        <item name="android:navigationBarColor">@color/transparent</item>
-    </style>
-    <style name="CustomDialog" parent="android:Theme.Dialog">
-        <item name="android:windowIsTranslucent">true</item>
-        <item name="android:layout_margin">@dimen/margin_10</item>
-        <item name="android:windowBackground">@android:color/transparent</item>
-    </style>
+
+
 </resources>

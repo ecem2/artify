@@ -5,6 +5,7 @@ import android.content.ContentValues
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
+import android.os.Bundle
 import android.os.Environment
 import android.os.ParcelFileDescriptor
 import android.provider.MediaStore
@@ -19,13 +20,18 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.hidden.artify.R
+import com.hidden.artify.core.common.ArgumentKey
+import com.hidden.artify.core.common.ArgumentKey.EDIT_PHOTO_MODEL
+import com.hidden.artify.core.common.ArgumentKey.REQUEST_MODEL
 import com.hidden.artify.core.fragments.BaseFragment
 import com.hidden.artify.data.model.GenerateModel
+import com.hidden.artify.data.model.RequestModel
 import com.hidden.artify.data.model.SizeModel
 import com.hidden.artify.data.remote.ApiService
 import com.hidden.artify.databinding.FragmentGenerateBinding
 import com.hidden.artify.extensions.makePostRequest
 import com.hidden.artify.extensions.popBack
+import com.hidden.artify.ui.edit.EditPhotoFragment
 import com.hidden.artify.ui.home.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import okhttp3.OkHttpClient
@@ -43,7 +49,7 @@ import java.io.OutputStream
 
 @AndroidEntryPoint
 class GenerateFragment : BaseFragment<HomeViewModel, FragmentGenerateBinding>() {
-
+    private var generatedImage: GenerateModel? = null
     private val args: GenerateFragmentArgs by navArgs()
     private val client = OkHttpClient()
     private val imageList: ArrayList<GenerateModel> = ArrayList()
@@ -65,17 +71,13 @@ class GenerateFragment : BaseFragment<HomeViewModel, FragmentGenerateBinding>() 
             buttonShare.isClickable = false
         }
         setupLottie()
-        setupArtStyles()
+       // setupArtStyles()
         viewBinding.ivBack.setOnClickListener {
             popBack()
         }
 
         Log.e("salimmm", "args.requestModel ${args.requestModel}")
-        sendRequest(
-            args.requestModel.prompt,
-            args.requestModel.count,
-            args.requestModel.size
-        )
+
 
         viewBinding.buttonDownload.setOnClickListener {
             if (!isStorageImagePermitted) {
@@ -88,13 +90,30 @@ class GenerateFragment : BaseFragment<HomeViewModel, FragmentGenerateBinding>() 
         }
 
         viewBinding.buttonEdit.setOnClickListener {
-            findNavController().navigate(GenerateFragmentDirections.actionGenerateFragmentToEditPhotoFragment(
-                SizeModel(
-                    icon = imageList[0].image,
-                    size = args.requestModel.size,
-                    isSelected = false
-                )
-            ))
+            Log.d("aassaa", "Edit butonuna tıklandı.")
+            sendRequest(
+                args.requestModel.prompt,
+                args.requestModel.count,
+                args.requestModel.size
+            )
+            val action =
+                GenerateFragmentDirections.actionGenerateFragmentToEditPhotoFragment()
+            try {
+                findNavController().navigate(action)
+            } catch (e: Exception) {
+            }
+        }
+    }
+    private fun navigateToEditGenerateFragment(editModel: SizeModel) {
+        val bundle = Bundle()
+        bundle.putParcelable(EDIT_PHOTO_MODEL, editModel)
+        val editPhotoFragment = EditPhotoFragment()
+        editPhotoFragment.arguments = bundle
+        parentFragmentManager.beginTransaction().apply {
+            replace(R.id.container, editPhotoFragment)
+            addToBackStack(ArgumentKey.GENERATE_SCREEN)
+            attach(GenerateFragment())
+            commit()
         }
     }
 
@@ -188,7 +207,7 @@ class GenerateFragment : BaseFragment<HomeViewModel, FragmentGenerateBinding>() 
 
     private fun setupLottie() {
         viewBinding.apply {
-            buttonDownload.visibility = View.GONE
+           // buttonDownload.visibility = View.GONE
             ivGeneratedImage.visibility = View.GONE
             animationView.visibility = View.VISIBLE
             animationView.playAnimation()
@@ -249,7 +268,7 @@ class GenerateFragment : BaseFragment<HomeViewModel, FragmentGenerateBinding>() 
                         animationView.cancelAnimation()
                         animationView.visibility = View.GONE
                         tvGenerating.visibility = View.GONE
-                        buttonDownload.visibility = View.VISIBLE
+                      //  buttonDownload.visibility = View.VISIBLE
                         ivGeneratedImage.visibility = View.VISIBLE
                     }
 
@@ -272,20 +291,20 @@ class GenerateFragment : BaseFragment<HomeViewModel, FragmentGenerateBinding>() 
         }
     }
 
-    private fun setupArtStyles() {
-        generateAdapter.submitList(viewModel.imageList)
-        viewBinding.rvArts.apply {
-            adapter = generateAdapter
-            layoutManager =
-                object : LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false) {
-                    override fun checkLayoutParams(lp: RecyclerView.LayoutParams): Boolean {
-                        lp.width = width / 3
-                        return true
-                    }
-                }
-            setHasFixedSize(true)
-        }
-    }
+//    private fun setupArtStyles() {
+//        generateAdapter.submitList(viewModel.imageList)
+//        viewBinding.rvArts.apply {
+//            adapter = generateAdapter
+//            layoutManager =
+//                object : LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false) {
+//                    override fun checkLayoutParams(lp: RecyclerView.LayoutParams): Boolean {
+//                        lp.width = width / 3
+//                        return true
+//                    }
+//                }
+//            setHasFixedSize(true)
+//        }
+//    }
 
     private fun onArtItemClicked(artStyleModel: GenerateModel, i: Int) {
         Log.d("salimmm", "artStyleModel $artStyleModel")

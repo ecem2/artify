@@ -78,7 +78,7 @@
             app:nullable="true" />
         <action
             android:id="@+id/action_editPhotoFragment_to_editFragment"
-            app:destination="@id/editFragment"
+            app:destination="@id/editPhotoFragment"
             app:popUpTo="@id/editPhotoFragment"
             app:popUpToInclusive="true" />
     </fragment>

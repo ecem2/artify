@@ -113,9 +113,9 @@ class HomeViewModel @Inject constructor(
     }
 
     private fun getSizeList() {
-        itemList.add(SizeModel(icon = "", size = "256x256", isSelected = true))
-        itemList.add(SizeModel(icon = "", size = "512x512", isSelected = false))
-        itemList.add(SizeModel(icon = "", size = "1024x1024", isSelected = false))
+        itemList.add(SizeModel(icon = "", size = "1024x1024", isSelected = true))
+        itemList.add(SizeModel(icon = "", size = "1024x1792", isSelected = false))
+        itemList.add(SizeModel(icon = "", size = "1792x1024", isSelected = false))
     }
 
     private fun getAnimationList() {

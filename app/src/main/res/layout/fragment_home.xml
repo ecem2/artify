@@ -13,6 +13,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:id="@+id/fragment_container"
         android:background="@color/black">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -122,7 +123,7 @@
                 <androidx.appcompat.widget.AppCompatEditText
                     android:id="@+id/et_prompt"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:autoSizeMaxTextSize="@dimen/text_size_20"
                     android:autoSizeMinTextSize="@dimen/text_size_12"
@@ -137,7 +138,7 @@
                     android:padding="@dimen/padding_16"
                     android:textAllCaps="false"
                     android:textColor="@color/white"
-                    android:textColorHint="@color/white"
+                    android:textColorHint="#80FFFFFF"
                     android:textCursorDrawable="@drawable/et_cursor"
                     android:textSize="@dimen/text_size_16"/>
 
@@ -177,6 +178,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                android:gravity="center"
                 android:layout_marginStart="@dimen/margin_24"
                 android:layout_marginEnd="@dimen/margin_24"
                 android:layout_marginTop="@dimen/margin_8"
@@ -186,7 +188,7 @@
 
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:id="@+id/ll_square"
-                    android:layout_width="88dp"
+                    android:layout_width="108dp"
                     android:layout_height="42dp"
                     android:layout_marginStart="@dimen/margin_12"
                     android:background="@drawable/bg_size"
@@ -214,7 +216,7 @@
 
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:id="@+id/ll_rectangle"
-                    android:layout_width="88dp"
+                    android:layout_width="108dp"
                     android:layout_height="42dp"
                     android:layout_marginStart="@dimen/margin_12"
                     android:background="@drawable/bg_size"
@@ -242,7 +244,7 @@
 
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:id="@+id/ll_vertical"
-                    android:layout_width="88dp"
+                    android:layout_width="108dp"
                     android:layout_height="42dp"
                     android:layout_marginStart="@dimen/margin_12"
                     android:background="@drawable/bg_size"
@@ -363,34 +365,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/gl_home_button" />
-            <!--                  <com.google.android.material.button.MaterialButton-->
-            <!--            android:id="@+id/button_generate"-->
-            <!--            android:layout_width="wrap_content"-->
-            <!--            android:layout_height="55dp"-->
-            <!--            android:layout_marginStart="@dimen/margin_24"-->
-            <!--            android:layout_marginTop="@dimen/margin_10"-->
-            <!--            android:layout_marginEnd="@dimen/margin_24"-->
-            <!--            android:layout_marginBottom="@dimen/margin_30"-->
-            <!--            android:autoSizeMaxTextSize="@dimen/text_size_20"-->
-            <!--            android:autoSizeMinTextSize="@dimen/text_size_12"-->
-            <!--            android:autoSizeTextType="uniform"-->
-            <!--            android:background="@mipmap/bg_generate_button"-->
-            <!--            android:fontFamily="@font/inter_bold"-->
-            <!--            android:maxWidth="250dp"-->
-            <!--            android:maxHeight="70dp"-->
-            <!--            android:text="@string/generate"-->
-            <!--            android:textAllCaps="false"-->
-            <!--            android:textColor="@color/white"-->
-            <!--            android:textSize="@dimen/text_size_16"-->
-            <!--            app:backgroundTint="@null"-->
-            <!--            app:icon="@drawable/ic_onboard_star"-->
-            <!--            app:iconGravity="textEnd"-->
-            <!--            app:iconPadding="10dp"-->
-            <!--            app:iconTint="@color/white"-->
-            <!--            app:layout_constraintBottom_toBottomOf="parent"-->
-            <!--            app:layout_constraintEnd_toEndOf="parent"-->
-            <!--            app:layout_constraintStart_toStartOf="parent"-->
-            <!--            app:layout_constraintTop_toBottomOf="@+id/gl_home_button" />-->
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
